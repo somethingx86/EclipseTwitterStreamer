@@ -1,0 +1,56 @@
+package mainpkg;
+
+import twitter4j.FilterQuery;
+import twitter4j.StatusListener;
+
+import java.io.*;
+
+import twitter4j.TwitterStream;
+
+public class TweetsWithHashtagFilterStreamer {
+	private TwitterStream twitterstream;
+	public TweetsWithHashtagFilterStreamer(TwitterStream paramTwitter){
+		twitterstream =paramTwitter;
+	}
+	
+	public void streamTweetsWithHashtags(String strFilenameTweetsUSOut,String strFilenameTweetsESOut)
+	{
+		if(strFilenameTweetsUSOut==null){
+			strFilenameTweetsUSOut="streamTweetsOutputUS.txt";
+		}
+		
+		if(strFilenameTweetsESOut==null){
+			strFilenameTweetsESOut="streamTweetsOutputES.txt";
+		}
+		
+		File tweetsSavedFileUS=new File(strFilenameTweetsUSOut);
+		File tweetsSavedFileES=new File(strFilenameTweetsESOut);
+		try {
+			BufferedWriter bwTweetsUS=new BufferedWriter(new OutputStreamWriter(new FileOutputStream(tweetsSavedFileUS),"utf-8"));
+			BufferedWriter bwTweetsES=new BufferedWriter(new OutputStreamWriter(new FileOutputStream(tweetsSavedFileES),"utf-8"));
+			StatusListener listener=new HashtagStatusListener(bwTweetsUS,bwTweetsES); 
+			twitterstream.addListener(listener);
+			twitterstream.filter(new FilterQuery(0, null,new String[]{".",","," "}));
+			
+//			Scanner scanner=new Scanner(System.in);
+//			scanner.next();
+//			BufferedWriter bwUserCount=new BufferedWriter(new FileWriter(userCountSavedFile));
+//			bwUserCount.write(Integer.toString(userCount)+"\r\n");
+//			bwUserCount.close();
+			
+//			twitterstream.clearListeners();
+//			twitterstream.cleanUp();
+			
+//			bwTweets.close();
+//			oosUsers.close();
+//			fosUsers.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Failed to spideTweetsWithHashtags " + e.getMessage());
+			System.exit(-1);
+		}
+		return;
+	}
+
+}

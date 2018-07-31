@@ -1,0 +1,71 @@
+package mainpkg;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
+import twitter4j.Query;
+import twitter4j.QueryResult;
+import twitter4j.Status;
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
+import twitter4j.TwitterFactory;
+import twitter4j.TwitterObjectFactory;
+import twitter4j.TwitterStream;
+import twitter4j.TwitterStreamFactory;
+import twitter4j.auth.AccessToken;
+import twitter4j.conf.ConfigurationBuilder;
+import twitter4j.User;
+import twitter4j.examples.oauth.GetAccessToken;
+//NoReferencedLibrary是直接用源码，没用编译好的Lib,这样做带来的额外劳动就是要用引入下面5个库
+//实际上,我只导入了core和examples,从example下的stream_more_than_core可以看出,如果要用stream
+//则必须导入stream文件夹
+//首先创建一个新的sourceFolder,然后import文件系统,import main-java下的文件
+//另外,注意apache的httpclient4.5.2,它用得是4.4.4的Core
+
+//关于project->properties->libraries,如果是在project下导入了.jar文件,则是Add jars
+//如果未在project下导入.jar文件,则是add External Jars
+
+//log4j.properties记得导入到coreModule文件夹下,否则log4j是用不了的,我是怎么发现的?见本工程开头的 log4j配置.docx
+
+public class Main {
+	public static void main(String[] args){
+		//设定accesstoken
+//		String consumerKey="oagecciFuXeNyeoO7Lmk94WuM";
+//		String consumerSecret="rS3PTWRhTSFQKkYIiPxLwY3GFZHqcBXtqRLuiiDGXKvqsaqwTy";
+//		String[] ags=new String[2];
+//		ags[0]=consumerKey;
+//		ags[1]=consumerSecret;
+//		GetAccessToken.main(ags);
+        GetSetAccessToken getsetaccesstoken=new GetSetAccessToken();
+        String[] accesstokenarray=getsetaccesstoken.getSetAccessToken();//consumerKey,consumerSecret);
+      //System.out.println(accesstokenarray[0]+" "+accesstokenarray[1]+"\r\n");
+		Twitter twitter=new TwitterFactory().getInstance();//this function implicitly read twitter4j.properties 
+		AccessToken accesstoken=new AccessToken(accesstokenarray[0],accesstokenarray[1]);
+		//twitter.setOAuthConsumer("the consumer key which was originally placed in the twitter4j.properties file", "the consumer secret which was originally placed in the twitter4j.properties file");
+		twitter.setOAuthAccessToken(accesstoken);//if you didn't call twitter.setOAuthConsumer, then you must have twitter4j.properties file in project since this function implicitly read twitter4j.properties if no consumerkey is specialized 
+		
+//--------------------------------------下面使用的是stream的API,后标为1的是表示第一套能运行的代码
+		
+//		TwitterStream twitterStream1 = new TwitterStreamFactory().getInstance();
+////		TweetsWithHashtagFilterStreamer twstmrHillary=new TweetsWithHashtagFilterStreamer(twitterStream1);
+////		twstmrHillary.streamTweetsWithHashtags(new String[]{"Hillary"},"streamTweetsOutputHillary.txt","streamUsersOutputHillary.dat");
+//		
+////		TwitterStream twitterStream2 = new TwitterStreamFactory().getInstance();
+////		TweetsWithHashtagFilterStreamer twstmrTrump=new TweetsWithHashtagFilterStreamer(twitterStream2);
+////		twstmrTrump.streamTweetsWithHashtags(new String[]{"Trump"},"streamTweetsOutputTrump.txt","streamUsersOutputTrump.dat");
+////		
+//		
+//		ConfigurationBuilder cb = new ConfigurationBuilder();//这个是用来配置的 
+//        cb.setDebugEnabled(true);
+//        //  .setOAuthConsumerKey("7ZVgfKiOvBDcDFpytRWSA")  
+//        //  .setOAuthConsumerSecret("JmeJVeym78arzmGthrDUshQyhkq6nWA9tWLUKxc")  
+//        //  .setOAuthAccessToken("321341780-Zy7LptVYBZBVvAeQ5GFJ4aKFw8sdqhWBnvA3pDuO")  
+//        //  .setOAuthAccessTokenSecret("foi8FnQCeN0J5cdwad05Q6d7dbytFayQn1ZOvmhF6Qc");//这个是用来设置consumerSecret等等4项配置的,如果不在这边配置,则自动用作者原来写死在程序里面的四项配置。StreamMethod和core的authencation是独立的
+//        cb.setJSONStoreEnabled(true);//这个允许HashtagStatusListener中TwitterObjectFactory.getRawJSON(status)的执行
+//		TwitterStream twitterStream3 = new TwitterStreamFactory(cb.build()).getInstance();
+//		TweetsWithHashtagFilterStreamer twstmrGunControl=new TweetsWithHashtagFilterStreamer(twitterStream3);
+//		twstmrGunControl.streamTweetsWithHashtags("streamTweetsUSJsonUtf8.txt","streamTweetsESJsonUtf8.txt");
+		
+	}
+}

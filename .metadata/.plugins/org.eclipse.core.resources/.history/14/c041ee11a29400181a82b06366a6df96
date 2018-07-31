@@ -1,0 +1,63 @@
+package mainpkg;
+
+import twitter4j.StallWarning;
+import twitter4j.Status;
+import twitter4j.StatusDeletionNotice;
+import twitter4j.StatusListener;
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+
+public class HashtagStatusListener implements StatusListener{
+	private BufferedWriter bwTweets;
+	private ObjectOutputStream oosUsers;
+	private FileOutputStream fos;
+	private Integer userCount;
+	public HashtagStatusListener(BufferedWriter parambwTweets,ObjectOutputStream paramoosUsers,FileOutputStream parafos,Integer paramuserCount)
+	{
+		bwTweets=parambwTweets;
+		oosUsers=paramoosUsers;
+		userCount=paramuserCount;
+		fos=parafos;
+	}
+	@Override
+    public void onStatus(Status status) {
+        System.out.println("@" + status.getUser().getScreenName() + " - " + status.getText()+" - "+status.getCreatedAt()+" - "+status.getId());
+        try {
+			bwTweets.write("@" + status.getUser().getScreenName() + " - " + status.getText()+" - "+status.getCreatedAt()+" - "+status.getId()+"\r\n");
+			oosUsers.writeObject(status.getUser());
+			//++userCount;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+        	System.out.println("Failed In listener IO "+ e.getMessage());
+        	System.exit(-1);
+		}
+    }
+
+    @Override
+    public void onDeletionNotice(StatusDeletionNotice statusDeletionNotice) {
+        //System.out.println("Got a status deletion notice id:" + statusDeletionNotice.getStatusId());
+    }
+
+    @Override
+    public void onTrackLimitationNotice(int numberOfLimitedStatuses) {
+        //System.out.println("Got track limitation notice:" + numberOfLimitedStatuses);
+    }
+
+    @Override
+    public void onScrubGeo(long userId, long upToStatusId) {
+        //System.out.println("Got scrub_geo event userId:" + userId + " upToStatusId:" + upToStatusId);
+    }
+
+    @Override
+    public void onStallWarning(StallWarning warning) {
+        //System.out.println("Got stall warning:" + warning);
+    }
+
+    @Override
+    public void onException(Exception ex) {
+        ex.printStackTrace();
+    }
+}

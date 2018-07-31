@@ -1,0 +1,41 @@
+package mainpkg;
+
+import twitter4j.Twitter;
+import twitter4j.TwitterFactory;
+import twitter4j.auth.AccessToken;
+
+public class Main {
+	public static void main(String[] args){
+
+        GetSetAccessToken getsetaccesstoken=new GetSetAccessToken();
+        String[] accesstokenarray=getsetaccesstoken.getSetAccessToken();
+        //System.out.println(accesstokenarray[0]+" "+accesstokenarray[1]+"\r\n");
+		Twitter twitter=new TwitterFactory().getInstance();//this function implicitly read twitter4j.properties 
+		AccessToken accesstoken=new AccessToken(accesstokenarray[0],accesstokenarray[1]);
+		//twitter.setOAuthConsumer("the consumer key which was originally placed in the twitter4j.properties file", "the consumer secret which was originally placed in the twitter4j.properties file");
+		twitter.setOAuthAccessToken(accesstoken);//if you didn't call twitter.setOAuthConsumer, then you must have twitter4j.properties file in project since this function implicitly read twitter4j.properties if no consumerkey is specialized 
+		
+//--------------------------------------下面使用的是stream的API,后标为1的是表示第一套能运行的代码
+		
+//		TwitterStream twitterStream1 = new TwitterStreamFactory().getInstance();
+////		TweetsWithHashtagFilterStreamer twstmrHillary=new TweetsWithHashtagFilterStreamer(twitterStream1);
+////		twstmrHillary.streamTweetsWithHashtags(new String[]{"Hillary"},"streamTweetsOutputHillary.txt","streamUsersOutputHillary.dat");
+//		
+////		TwitterStream twitterStream2 = new TwitterStreamFactory().getInstance();
+////		TweetsWithHashtagFilterStreamer twstmrTrump=new TweetsWithHashtagFilterStreamer(twitterStream2);
+////		twstmrTrump.streamTweetsWithHashtags(new String[]{"Trump"},"streamTweetsOutputTrump.txt","streamUsersOutputTrump.dat");
+////		
+//		
+//		ConfigurationBuilder cb = new ConfigurationBuilder();//这个是用来配置的 
+//        cb.setDebugEnabled(true);
+//        //  .setOAuthConsumerKey("7ZVgfKiOvBDcDFpytRWSA")  
+//        //  .setOAuthConsumerSecret("JmeJVeym78arzmGthrDUshQyhkq6nWA9tWLUKxc")  
+//        //  .setOAuthAccessToken("321341780-Zy7LptVYBZBVvAeQ5GFJ4aKFw8sdqhWBnvA3pDuO")  
+//        //  .setOAuthAccessTokenSecret("foi8FnQCeN0J5cdwad05Q6d7dbytFayQn1ZOvmhF6Qc");//这个是用来设置consumerSecret等等4项配置的,如果不在这边配置,则自动用作者原来写死在程序里面的四项配置。StreamMethod和core的authencation是独立的
+//        cb.setJSONStoreEnabled(true);//这个允许HashtagStatusListener中TwitterObjectFactory.getRawJSON(status)的执行
+//		TwitterStream twitterStream3 = new TwitterStreamFactory(cb.build()).getInstance();
+//		TweetsWithHashtagFilterStreamer twstmrGunControl=new TweetsWithHashtagFilterStreamer(twitterStream3);
+//		twstmrGunControl.streamTweetsWithHashtags("streamTweetsUSJsonUtf8.txt","streamTweetsESJsonUtf8.txt");
+		
+	}
+}

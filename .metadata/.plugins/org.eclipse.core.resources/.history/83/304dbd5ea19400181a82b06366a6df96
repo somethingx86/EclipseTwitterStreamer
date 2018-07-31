@@ -1,0 +1,31 @@
+package mainpkg;
+
+import twitter4j.Twitter;
+import twitter4j.TwitterFactory;
+import twitter4j.auth.AccessToken;
+import twitter4j.TwitterStream;
+import twitter4j.TwitterStreamFactory;
+
+public class Main {
+	public static void main(String[] args){
+
+		//-----------------------------authentication using rest API, this is separated from the streaming API
+//        GetSetAccessToken getsetaccesstoken=new GetSetAccessToken();
+//        String[] accesstokenarray=getsetaccesstoken.getSetAccessToken();
+//        //System.out.println(accesstokenarray[0]+" "+accesstokenarray[1]+"\r\n");
+//		Twitter twitter=new TwitterFactory().getInstance();//this function implicitly read twitter4j.properties, setting consumer secret and the accessToken
+//		AccessToken accesstoken=new AccessToken(accesstokenarray[0],accesstokenarray[1]);
+//		//twitter.setOAuthConsumer("the consumer key which was originally placed in the twitter4j.properties file", "the consumer secret which was originally placed in the twitter4j.properties file");
+//		twitter.setOAuthAccessToken(accesstoken);//if you didn't call twitter.setOAuthConsumer, then you must have twitter4j.properties file in project since this function implicitly read twitter4j.properties if no consumerkey is specialized 
+		
+//--------------------------------------using streaming API wrapped by twitter4j, its authentication is separated from the rest API
+		
+		TwitterStream twitterStream1 = new TwitterStreamFactory().getInstance();//this function implicitly read twitter4j.properties, setting consumer secret and the accessToken
+////		TweetsWithHashtagFilterStreamer twstmrHillary=new TweetsWithHashtagFilterStreamer(twitterStream1);
+////		twstmrHillary.streamTweetsWithHashtags(new String[]{"Hillary"},"streamTweetsOutputHillary.txt","streamUsersOutputHillary.dat");
+//		
+////		TwitterStream twitterStream2 = new TwitterStreamFactory().getInstance();
+////		TweetsWithHashtagFilterStreamer twstmrTrump=new TweetsWithHashtagFilterStreamer(twitterStream2);
+////		twstmrTrump.streamTweetsWithHashtags(new String[]{"Trump"},"streamTweetsOutputTrump.txt","streamUsersOutputTrump.dat");
+	}
+}
