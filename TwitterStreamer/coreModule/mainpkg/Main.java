@@ -5,6 +5,7 @@ import twitter4j.TwitterFactory;
 import twitter4j.auth.AccessToken;
 import twitter4j.TwitterStream;
 import twitter4j.TwitterStreamFactory;
+import twitter4j.conf.ConfigurationBuilder;
 
 public class Main {
 	public static void main(String[] args){
@@ -22,6 +23,6 @@ public class Main {
 		
 		TwitterStream twitterStream1 = new TwitterStreamFactory().getInstance();//this function implicitly read twitter4j.properties, setting consumer secret and the accessToken
 		TweetsWithHashtagFilterStreamer twstmrHillary=new TweetsWithHashtagFilterStreamer(twitterStream1);
-		twstmrHillary.streamTweetsWithHashtags(new String[]{"#PresidentElection,#Election2016,#Hillary,#Trump"},"streamTweetsOutputHillaryORTrump.txt","streamUsersOutputHillaryORTrump.dat");
+		twstmrHillary.streamTweetsWithHashtags(new String[]{"Hillary,Trump"},"streamTweetsOutputHillaryORTrump.txt","streamUsersOutputHillaryORTrump.dat");
 	}
 }
