@@ -7,5 +7,7 @@ Quick Start
 -------------
 run the streaming crawler
 
-#Main.java
-1)Download the repository. 2)Open the repository as the workspace by Eclipse. 3)locate "Main.java" and click "run".
+## Main.java
+* Download the repository. 
+* Open the repository as the workspace by Eclipse. 
+* locate "Main.java" and click "run".
